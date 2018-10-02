@@ -1,18 +1,21 @@
-package dfs;
+package algorithmA1;
 
 import java.util.ArrayList;
 
 public class Node {
 	
 	private int[] puzzle; 
+	private boolean hasChild;
 	private int empty;
 	private char movePosition;
 	private int lastMove;
+	private int h1; //heuristic value 1 Manhattan distance
+	private final int[][] distance = {{0,1,2,3,1,1,2,3,2,2,2,3},{1,0,1,2,1,1,1,2,2,2,2,2},{2,1,0,1,2,1,1,1,2,2,2,2},
+			{3,2,1,0,3,2,1,1,3,2,2,2},{1,1,2,3,0,1,2,3,1,1,2,3},{1,1,1,2,1,0,1,2,1,1,1,2},{2,1,1,1,2,1,0,1,2,1,1,1},{3,2,1,1,3,2,1,0,3,2,1,1},
+			{2,2,2,3,1,1,2,3,0,1,2,3},{2,2,2,2,1,1,1,2,1,0,1,2},{2,2,2,2,2,1,1,1,2,1,0,1},{3,2,2,2,3,2,1,1,3,2,1,0}};; // matrix of distance of each tile with all others
 	
-	public Node() {
-		
-	}
-	
+	private int g_n;
+	private int f_n; 
 	public Node(int[] initial) {
 		puzzle = new int[12];
 		lastMove = 0;
@@ -23,7 +26,10 @@ public class Node {
 			}
 		}
 		movePosition =  (char) ('a' + this.empty);
-		
+		h1 = 0;
+		hasChild = false;
+		g_n = 0;
+		f_n = 0;
 	}
 
 	public int[] getPuzzle() {
@@ -180,6 +186,52 @@ public class Node {
 
 	public void setLastMove(int lastMove) {
 		this.lastMove = lastMove;
+	}
+
+	public int getH1() {
+		this.evaluateH1();
+		return h1;
+	}
+
+	public int evaluateH1() {
+		int sum = 0;
+		int[] goal = {1,2,3,4,5,6,7,8,9,10,11,0};
+		for(int i = 0; i < goal.length; i++) {
+			for(int j = 0; j < goal.length; j++) {
+			if(this.puzzle[i] == 0) {
+				break;
+			}
+			else if(this.puzzle[i] == goal[j]) {
+				sum = sum + distance[i][j];
+			}
+			}
+		}
+		this.h1 = sum;
+		return sum;
+	}
+
+	public boolean isHasChild() {
+		return hasChild;
+	}
+
+	public void setHasChild(boolean hasChild) {
+		this.hasChild = hasChild;
+	}
+
+	public int getG_n() {
+		return g_n;
+	}
+
+	public void setG_n(int g_n) {
+		this.g_n = g_n;
+	}
+
+	public int getF_n() {
+		return f_n;
+	}
+
+	public void setF_n(int f_n) {
+		this.f_n = f_n;
 	}
 
 }

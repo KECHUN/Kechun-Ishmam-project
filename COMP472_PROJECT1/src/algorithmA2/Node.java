@@ -1,18 +1,17 @@
-package dfs;
+package algorithmA2;
 
 import java.util.ArrayList;
 
 public class Node {
 	
 	private int[] puzzle; 
+	private boolean hasChild;
 	private int empty;
 	private char movePosition;
 	private int lastMove;
-	
-	public Node() {
-		
-	}
-	
+	private int h2; //heuristic value 2 hamming distance
+	private int g_n;
+	private int f_n; 
 	public Node(int[] initial) {
 		puzzle = new int[12];
 		lastMove = 0;
@@ -23,7 +22,10 @@ public class Node {
 			}
 		}
 		movePosition =  (char) ('a' + this.empty);
-		
+		h2 = 0;
+		hasChild = false;
+		g_n = 0;
+		f_n = 0;
 	}
 
 	public int[] getPuzzle() {
@@ -180,6 +182,51 @@ public class Node {
 
 	public void setLastMove(int lastMove) {
 		this.lastMove = lastMove;
+	}
+
+	public int getH2() {
+		this.evaluateH2();
+		return h2;
+	}
+
+	public int evaluateH2() {
+		int sum = 0;
+		int[] goal = {1,2,3,4,5,6,7,8,9,10,11,0};
+		for(int i = 0; i < goal.length; i++) {
+			if(this.puzzle[i] ==0) {
+				
+			}
+			
+			else if(this.puzzle[i] != goal[i]) {
+				sum = sum +1;
+			}	
+		}
+		this.h2 = sum;
+		return sum;
+	}
+
+	public boolean isHasChild() {
+		return hasChild;
+	}
+
+	public void setHasChild(boolean hasChild) {
+		this.hasChild = hasChild;
+	}
+
+	public int getG_n() {
+		return g_n;
+	}
+
+	public void setG_n(int g_n) {
+		this.g_n = g_n;
+	}
+
+	public int getF_n() {
+		return f_n;
+	}
+
+	public void setF_n(int f_n) {
+		this.f_n = f_n;
 	}
 
 }

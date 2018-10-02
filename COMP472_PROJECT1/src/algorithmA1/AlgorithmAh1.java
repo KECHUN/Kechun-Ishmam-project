@@ -1,10 +1,12 @@
-package dfs;
+package algorithmA1;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class depthFirstSearch {
+public class AlgorithmAh1 {
 
 	public static void main(String[] args) {
 
@@ -37,7 +39,7 @@ public class depthFirstSearch {
 	  }
 		System.out.print( "size of nodes: " + graph.getPuzzles().size() +
 				"\n");
-		depthFirstSearch(graph);
+		algorithmA_search(graph);
 	}	
 	
 	public static void expandGraph(Graph graph){
@@ -55,11 +57,13 @@ public class depthFirstSearch {
 			 Node child = graph.getPuzzles().get(i).moveDown();
 			  if(child != null)  {
 				if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
+				child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	child.setF_n(child.getG_n() + child.getH1());
 				graph.getPuzzles().add(child);
-				
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -70,14 +74,17 @@ public class depthFirstSearch {
 					break;
 				}
 		   }	
+			  
 			  child = graph.getPuzzles().get(i).moveDownleft();
 			  if(child != null)  {
 				if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
+				child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	child.setF_n(child.getG_n() + child.getH1());
 				graph.getPuzzles().add(child);
-				
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -88,14 +95,17 @@ public class depthFirstSearch {
 					break;
 				}
 		   }	
+			  
 			  child = graph.getPuzzles().get(i).moveLeft();
 			  if(child != null)  {
 				if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
-				graph.getPuzzles().add(child);
-				
+				child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	child.setF_n(child.getG_n() + child.getH1());
+			    	graph.getPuzzles().add(child);
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -109,11 +119,13 @@ public class depthFirstSearch {
 			  child = graph.getPuzzles().get(i).moveUpleft();
 			  if(child != null) {
 				if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
+				child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	child.setF_n(child.getG_n() + child.getH1());	
 				graph.getPuzzles().add(child);
-				
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -124,14 +136,16 @@ public class depthFirstSearch {
 					break;
 				}
 		   }	
-			  child = graph.getPuzzles().get(i).moveUp();
+			    child = graph.getPuzzles().get(i).moveUp();
 			  if(child != null) {
 			     if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
+			    	 child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	 child.setF_n(child.getG_n() + child.getH1());
 				graph.getPuzzles().add(child);
-				
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -146,11 +160,13 @@ public class depthFirstSearch {
 			  child = graph.getPuzzles().get(i).moveUpright();
 			  if(child != null)  {
 				if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
+				child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	child.setF_n(child.getG_n() + child.getH1());
 				graph.getPuzzles().add(child);
-				
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -164,11 +180,13 @@ public class depthFirstSearch {
 			  child = graph.getPuzzles().get(i).moveRight();
 			  if(child != null)  {
 				if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
+				child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	child.setF_n(child.getG_n() + child.getH1());
 				graph.getPuzzles().add(child);
-				
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -182,11 +200,13 @@ public class depthFirstSearch {
 			  child = graph.getPuzzles().get(i).moveDownright();
 			  if(child != null)  {
 				if(graph.getPuzzles().get(i).getLastMove() + child.getLastMove() !=0) {
+				child.setG_n(graph.getPuzzles().get(i).getG_n() +1);
+			    	child.setF_n(child.getG_n() + child.getH1());
 				graph.getPuzzles().add(child);
-				
+				graph.getPuzzles().get(i).setHasChild(true);
 				int s = i;
 				int e = graph.getPuzzles().indexOf(child);
-				Edge newOne = new Edge(s,e);
+				Edge1 newOne = new Edge1(s,e);
 				if(graph.getNeighbors().size() == s) {
 					graph.getNeighbors().add(new ArrayList<>());
 					graph.getNeighbors().get(s).add(newOne);
@@ -198,19 +218,21 @@ public class depthFirstSearch {
 				}
 		   }	
 			 
+			  
 	   }
 		
   }
-	public static void depthFirstSearch(Graph graph) {
-		//List<Integer> searchOrder = new ArrayList<>();
-		int[] parent = new int[graph.getPuzzles().size()];
-		for (int i = 0; i < parent.length; i++) {
-		  parent[i] = -1; 
-		}
+	public static void algorithmA_search(Graph graph) {
+		
+		
 		boolean[] isVisited = new boolean[graph.getPuzzles().size()];
 		int start = 0;
 		List <Integer> target = new ArrayList<>();;
-		dfs(start, parent, isVisited,graph,target);
+		Comparator<Node> comparator = new nodeComparator();
+		PriorityQueue <Node> queueChildren = new PriorityQueue<Node>(1000,comparator);
+		PriorityQueue <Node> queueTotal = new PriorityQueue<Node>(100000,comparator);
+		queueTotal.offer(graph.getPuzzles().get(0));
+		a_search(start, isVisited,graph,target,queueTotal,comparator,queueChildren);
 		if(target.isEmpty()) {
 			System.out.print( "No solution is found " +
 					"\n");
@@ -220,14 +242,14 @@ public class depthFirstSearch {
 		ArrayList <Node> path = new ArrayList<>();
 		do {
 			path.add(graph.getPuzzles().get(index));
-			index = parent[index];
+			index = graph.getParent()[index];
 			} while (index != -1);
 		for(int i = path.size() -1; i >= 0; i--) {
 			if(i == path.size() -1) {
 				System.out.println("0");
 			}
 			else {
-			System.out.println(path.get(i).getmovePosition());
+			System.out.println(path.get(i).getmovePosition() + " Node " + i + " h1 value " + path.get(i).getH1());
 			}
 			for(int j : path.get(i).getPuzzle()) {
 				System.out.print( j + ",");
@@ -240,26 +262,61 @@ public class depthFirstSearch {
 
 	
 
-	public static void dfs(int s, int[] parent, boolean[] isVisited,Graph graph,List <Integer> target ) {
+	public static void a_search(int start,  boolean[] isVisited,Graph graph,List <Integer> target,PriorityQueue <Node> queueTotal, Comparator<Node> comparator,
+    PriorityQueue <Node> queueChildren) {
+		System.out.println("size of queueTotal " + queueTotal.size());
 		
+		if(!target.isEmpty() || queueTotal.size() >= 1000) {
+			return;
+		}
+		else {
 		
 		int i = 0;
-		isVisited[s] = true; 
-	
-		for (Edge e : graph.getNeighbors().get(s)) {
+		isVisited[start] = true; 
+		int theBest = 0;
+		
+		for (Edge1 e : graph.getNeighbors().get(start)) {
 		   if (!isVisited[e.t]) {
-			   parent[e.t] = s; 
+			   queueChildren.offer(graph.getPuzzles().get(e.t));
+			   if(!queueTotal.contains(graph.getPuzzles().get(e.t))) {
+			   queueTotal.offer(graph.getPuzzles().get(e.t));
+			   }
 			   if(graph.getPuzzles().get(e.t).isGoal()) {
 				   i  = e.t;
 				   target.add(i);
-				   System.out.print("look " + i +"\n");
+				   System.out.print("look at" + i +"\n");
 			   }		   
-			  
-		if(e.t < graph.getNeighbors().size())
-		   dfs(e.t, parent, isVisited,graph, target);
+	    }
+		  
+   }    
+		                              
+		theBest = graph.getPuzzles().indexOf(queueChildren.remove());
+		System.out.println("Node " + theBest + " h1= " + graph.getPuzzles().get(theBest).evaluateH1() + " queueTotal is empty " + queueTotal.isEmpty());
+		if(graph.getPuzzles().get(theBest).isHasChild() & (graph.getPuzzles().get(theBest).getH1() < graph.getPuzzles().get(start).getH1())) { // if reach the leave of the tree
+			   queueChildren.clear();
+		       a_search(theBest, isVisited,graph, target,queueTotal, comparator,queueChildren);
+		}
 		
-	 }
-   }
+		else {
 		
+		if(!queueTotal.isEmpty()){
+			   theBest = graph.getPuzzles().indexOf(queueTotal.remove());
+		
+		while(!graph.getPuzzles().get(theBest).isHasChild() || isVisited[theBest]) {
+			if(!queueTotal.isEmpty())
+			   theBest = graph.getPuzzles().indexOf(queueTotal.remove());
+			else 
+				return;
+			
+		}
+		System.out.println("The second index is " + theBest);
+		       queueChildren.clear();
+		       a_search(theBest, isVisited,graph, target,queueTotal, comparator,queueChildren);//1,0,3,7,5,2,6,4,9,10,11,8 //0,2,3,4,5,1,7,8,9,6,10,11//1,5,3,7,0,2,6,4,9,10,11,8
+		}
+		else
+			return;
+			
+	}
   }
-}//1,5,3,7,0,2,6,4,9,10,11,8
+ }
+}

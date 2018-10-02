@@ -1,17 +1,16 @@
-package dfs;
+package bfs2;
 
 import java.util.ArrayList;
 
 public class Node {
 	
 	private int[] puzzle; 
+	private boolean hasChild;
 	private int empty;
 	private char movePosition;
 	private int lastMove;
+	private int h2; //heuristic value 2 hamming distance
 	
-	public Node() {
-		
-	}
 	
 	public Node(int[] initial) {
 		puzzle = new int[12];
@@ -23,7 +22,9 @@ public class Node {
 			}
 		}
 		movePosition =  (char) ('a' + this.empty);
-		
+		h2 = 0;
+		hasChild = false;
+		        
 	}
 
 	public int[] getPuzzle() {
@@ -180,6 +181,34 @@ public class Node {
 
 	public void setLastMove(int lastMove) {
 		this.lastMove = lastMove;
+	}
+
+	public int getH2() {
+		return h2;
+	}
+
+	public int evaluateH2() {
+		int sum = 0;
+		int[] goal = {1,2,3,4,5,6,7,8,9,10,11,0};
+		for(int i = 0; i < goal.length; i++) {
+			if(this.puzzle[i] ==0) {
+				
+			}
+			
+			else if(this.puzzle[i] != goal[i]) {
+				sum = sum +1;
+			}	
+		}
+		this.h2 = sum;
+		return sum;
+	}
+
+	public boolean isHasChild() {
+		return hasChild;
+	}
+
+	public void setHasChild(boolean hasChild) {
+		this.hasChild = hasChild;
 	}
 
 }
